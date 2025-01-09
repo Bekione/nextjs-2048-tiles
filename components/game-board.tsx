@@ -7,7 +7,6 @@ import { Tile } from "./tile";
 import { useGame } from "@/hooks/use.game";
 import { type Direction } from "../types/game";
 
-
 const GameBoard = () => {
   const { gameState, move } = useGame();
 
@@ -71,7 +70,13 @@ const GameBoard = () => {
                   className="bg-muted-foreground/20 rounded-lg relative"
                   style={{ width: "85px", height: "85px" }}
                 >
-                  {cell && <Tile value={cell.value} />}
+                  {cell && (
+                    <Tile
+                      value={cell.value}
+                      isNew={cell.isNew}
+                      isMerged={cell.isMerged}
+                    />
+                  )}
                 </div>
               ))
             )}
