@@ -2,7 +2,7 @@ import { ThemeToggle } from "./theme-toggler";
 
 const Header = () => {
   return (
-    <div className="absolute top-0 left-0 w-full flex items-center justify-between mb p-4">
+    <div className="absolute top-0 left-0 w-full flex justify-between mb p-4 z-40">
       <div className="flex flex-col items-center">
         <span className="absolute mx-auto py-4 flex border w-fit bg-gradient-to-r blur-xl from-blue-500 via-teal-500 to-pink-500 bg-clip-text text-6xl box-content font-extrabold text-transparent text-center select-none">
           2048
