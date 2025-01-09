@@ -3,10 +3,12 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tile } from "./tile";
+import { useGame } from "@/hooks/use.game";
 
 const GameBoard = () => {
+    const { gameState } = useGame();
   return (
-    <div className="flex flex-1 flex-col items-center justify-center bg-background transition-colors duration-300">
+    <div className="flex flex-1 flex-col items-center justify-center bg-background transition-colors duration-300 z-50">
       
       <div className="w-[432px] flex justify-between mb-2">
         <Button variant="outline" className="h-14" onClick={() => {}}>
@@ -16,11 +18,11 @@ const GameBoard = () => {
           <CardContent className="flex items-center justify-center gap-2">
             <div className="flex flex-col items-center justify-center gap-1">
               <div className="text-muted-foreground text-sm">SCORE</div>
-              <div className="text-foreground text-xl font-bold">123640</div>
+              <div className="text-foreground text-xl font-bold">{gameState.score}</div>
             </div>
             <div className="flex flex-col items-center justify-center gap-1">
               <div className="text-muted-foreground text-sm">BEST</div>
-              <div className="text-foreground text-xl font-bold">18000</div>
+              <div className="text-foreground text-xl font-bold">{gameState.bestScore}</div>
             </div>
           </CardContent>
         </Card>
@@ -32,10 +34,16 @@ const GameBoard = () => {
             className="grid grid-cols-4 gap-2"
             style={{ width: "400px", height: "400px" }}
           >
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(
-              (row, i) => {
-                return <Tile key={i} value={row} />;
-              }
+            {gameState.grid.map((row, i) =>
+              row.map((cell, j) => (
+                <div key={`${i}-${j}`} className="bg-muted-foreground/20 rounded-lg relative" style={{ width: '85px', height: '85px' }}>
+                  {cell && (
+                    <Tile
+                      value={cell.value}
+                    />
+                  )}
+                </div>
+              ))
             )}
           </div>
         </CardContent>
