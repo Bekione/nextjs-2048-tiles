@@ -61,6 +61,58 @@ function compress(grid: Grid): Grid {
   return newGrid;
 }
 
+function merge(grid: Grid): { newGrid: Grid; score: number; merged: boolean } {
+  const newGrid = createEmptyGrid();
+  let score = 0;
+  let merged = false;
+
+  for (let i = 0; i < GRID_SIZE; i++) {
+    let colIndex = 0;
+    for (let j = 0; j < GRID_SIZE - 1; j++) {
+      if (!grid[i][j]) continue;
+
+      if (grid[i][j]?.value === grid[i][j + 1]?.value) {
+        const mergedValue = grid[i][j]!.value * 2;
+        newGrid[i][colIndex] = {
+          id: `${i}-${colIndex}-${Date.now()}`,
+          value: mergedValue,
+          x: i,
+          y: colIndex,
+          isMerged: true,
+        };
+        score += mergedValue;
+        merged = true;
+        j++; // Skip next cell as it's been merged
+      } else {
+        newGrid[i][colIndex] = {
+          ...grid[i][j]!,
+          id: `${i}-${colIndex}-${Date.now()}`,
+          x: i,
+          y: colIndex,
+          isMerged: false,
+        };
+      }
+      colIndex++;
+    }
+    // Handle the last cell if it wasn't merged
+    if (
+      grid[i][GRID_SIZE - 1] &&
+      colIndex < GRID_SIZE &&
+      !grid[i][GRID_SIZE - 1]?.isMerged
+    ) {
+      newGrid[i][colIndex] = {
+        ...grid[i][GRID_SIZE - 1]!,
+        id: `${i}-${colIndex}-${Date.now()}`,
+        x: i,
+        y: colIndex,
+        isMerged: false,
+      };
+    }
+  }
+
+  return { newGrid, score, merged };
+}
+
 function moveGrid(
   grid: Grid,
   direction: Direction
@@ -87,11 +139,17 @@ function moveGrid(
   const compressedGrid = compress(workingGrid);
   moved = JSON.stringify(compressedGrid) !== JSON.stringify(workingGrid);
 
-
-
+  // Merge
+  const {
+    newGrid: mergedGrid,
+    score: mergeScore,
+    merged,
+  } = merge(compressedGrid);
+  moved = moved || merged;
+  score += mergeScore;
 
   // Compress again after merging
-  workingGrid = compress(workingGrid);
+  workingGrid = compress(mergedGrid);
 
   // Rotate back
   switch (direction) {
