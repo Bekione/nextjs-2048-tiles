@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const colors = {
@@ -18,21 +19,23 @@ const colors = {
 
 interface TileProps {
   value: number;
-  isNew?: boolean
-  isMerged?: boolean
+  isNew?: boolean;
+  isMerged?: boolean;
 }
 
-
 export function Tile({ value, isNew, isMerged }: TileProps) {
-
   return (
-    <div
+    <motion.div
+      initial={isNew ? { scale: 0 } : { scale: 1 }}
+      animate={{ scale: 1 }}
+      transition={{ type: "spring", stiffness: 500, damping: 30 }}
       className={cn(
         "w-full h-full rounded-lg flex items-center justify-center text-4xl font-bold shadow-lg overflow-hidden",
-          (colors[value as keyof typeof colors] || "bg-violet-700 text-white")
+        colors[value as keyof typeof colors],
+        isMerged && 'animate-pop'
       )}
     >
-     {value}
-    </div>
+      {value}
+    </motion.div>
   );
 }
