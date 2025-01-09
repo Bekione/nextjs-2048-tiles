@@ -219,8 +219,42 @@ export function useGame() {
     [gameState]
   );
 
+  const checkForPossibleMoves = (grid: Grid): boolean => {
+    // Check for empty cells
+    if (grid.some((row) => row.some((cell) => !cell))) return true;
+
+    // Check for possible merges in rows and columns
+    for (let i = 0; i < GRID_SIZE; i++) {
+      for (let j = 0; j < GRID_SIZE - 1; j++) {
+        // Check horizontal merges
+        if (grid[i][j]?.value === grid[i][j + 1]?.value) return true;
+        // Check vertical merges
+        if (grid[j][i]?.value === grid[j + 1][i]?.value) return true;
+      }
+    }
+
+    return false;
+  };
+
+  const resetGame = useCallback(() => {
+    const initialGrid = createEmptyGrid();
+    const cell1 = generateRandomCell(initialGrid);
+    if (cell1) initialGrid[cell1.x][cell1.y] = cell1;
+    const cell2 = generateRandomCell(initialGrid);
+    if (cell2) initialGrid[cell2.x][cell2.y] = cell2;
+
+    setGameState({
+      grid: initialGrid,
+      score: 0,
+      bestScore: gameState.bestScore,
+      isGameOver: false,
+      hasWon: false,
+    });
+  }, [gameState.bestScore]);
+
   return {
     gameState,
     move,
+    resetGame,
   };
 }
