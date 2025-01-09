@@ -9,6 +9,8 @@ export type Cell = {
 
 export type Grid = (Cell | null)[][];
 
+export type Direction = 'up' | 'down' | 'left' | 'right'
+
 export type GameState = {
   grid: Grid;
   score: number;
