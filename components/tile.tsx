@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const colors = {
-  2: "bg-teal-400 text-white",
+  2: "bg-teal-200 text-white",
   4: "bg-teal-500 text-white",
   8: "bg-rose-400 text-white",
   16: "bg-rose-500 text-white",
