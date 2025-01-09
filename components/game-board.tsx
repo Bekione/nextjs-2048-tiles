@@ -102,6 +102,27 @@ const GameBoard = () => {
         </CardContent>
       </Card>
 
+      <Dialog open={gameState.isGameOver || gameState.hasWon} onOpenChange={() => {}}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{gameState.hasWon ? 'Congratulations! 🎉' : 'Game Over! 😢'}</DialogTitle>
+            <DialogDescription>
+              {gameState.hasWon 
+                ? <span>You've reached <span className="font-semibold text-teal-500">2048</span>! Want to keep going?</span>
+                : "No more moves available. Try again?"}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={resetGame}>New Game</Button>
+            {gameState.hasWon && (
+              <Button className="bg-gradient-to-r from-blue-500 via-teal-500 to-pink-500" onClick={() => setGameState((prev) => ({ ...prev, hasWon: false }))}>
+                Continue
+              </Button>
+            )}
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       <Dialog open={showResetConfirm} onOpenChange={setShowResetConfirm}>
         <DialogContent>
           <DialogHeader>
