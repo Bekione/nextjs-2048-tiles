@@ -18,10 +18,12 @@ const colors = {
 
 interface TileProps {
   value: number;
+  isNew?: boolean
+  isMerged?: boolean
 }
 
 
-export function Tile({ value }: TileProps) {
+export function Tile({ value, isNew, isMerged }: TileProps) {
 
   return (
     <div
