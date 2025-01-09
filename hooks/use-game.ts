@@ -207,12 +207,14 @@ export function useGame() {
       const hasWon = newGrid.some((row) =>
         row.some((cell) => cell?.value === WINNING_VALUE)
       );
+      const canMove = checkForPossibleMoves(newGrid)
+
 
       setGameState({
         grid: newGrid,
         score: newScore,
         bestScore: newBestScore,
-        isGameOver: false,
+        isGameOver: !canMove,
         hasWon,
       });
     },
@@ -256,5 +258,6 @@ export function useGame() {
     gameState,
     move,
     resetGame,
+    setGameState
   };
 }
