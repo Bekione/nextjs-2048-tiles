@@ -75,3 +75,20 @@
 .animate-pop {
   animation: pop 0.4s ease-out;
 }
+
+@keyframes gradientBackground {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}
+
+.animated-gradient {
+  background-size: 200% 200%;
+  animation: gradientBackground 5s ease infinite;
+}
