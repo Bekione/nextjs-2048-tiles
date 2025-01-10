@@ -52,8 +52,8 @@ const GameBoard = () => {
   }
   
   return (
-    <div className="flex flex-1 flex-col items-center justify-center bg-background transition-colors duration-300 z-50">
-      <div className="w-[432px] flex justify-between mb-2">
+    <div className="flex flex-1 flex-col items-center justify-center mt-8 md:mt-0 transition-colors duration-300 z-30">
+      <div className="w-[calc(85vw+32px)] xsm:w-[332px] md:w-[432px] flex justify-between mb-4 sm:mb-3">
         <Button variant="outline" className="h-14" onClick={handleNewGame}>
           New Game
         </Button>
@@ -75,18 +75,16 @@ const GameBoard = () => {
         </Card>
       </div>
 
-      <Card className="p-2 mb-2">
+      <Card className="p-2 mb-2 shadow-xl">
         <CardContent className="p-2 bg-muted rounded-lg">
           <div
-            className="grid grid-cols-4 items-center gap-2"
-            style={{ width: "400px", height: "400px" }}
+            className="grid grid-cols-4 items-center gap-2 w-[85vw] h-[85vw] xsm:w-[300px] xsm:h-[300px] md:w-[400px] md:h-[400px]"
           >
             {gameState.grid.map((row, i) =>
               row.map((cell, j) => (
                 <div
                   key={`${i}-${j}`}
-                  className="bg-muted-foreground/20 rounded-lg relative"
-                  style={{ width: "85px", height: "85px" }}
+                  className="bg-muted-foreground/20 rounded-lg relative w-[calc(80vw/4)] h-[calc(80vw/4)] xsm:w-[65px] xsm:h-[65px] md:w-[85px] md:h-[85px]"
                 >
                   {cell && (
                     <Tile
