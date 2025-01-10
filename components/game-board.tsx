@@ -52,8 +52,8 @@ const GameBoard = () => {
   }
   
   return (
-    <div className="flex flex-1 flex-col items-center justify-center mt-8 md:mt-0 transition-colors duration-300 z-30">
-      <div className="w-[calc(85vw+32px)] xsm:w-[332px] md:w-[432px] flex justify-between mb-4 sm:mb-3">
+    <div className="flex flex-1 flex-col items-center justify-center mt-8 md:mt-0 transition-colors duration-300 sm:z-50">
+      <div className="w-[calc(85vw+28px)] xsm:w-[332px] md:w-[432px] flex justify-between mb-4 sm:mb-3">
         <Button variant="outline" className="h-14" onClick={handleNewGame}>
           New Game
         </Button>
@@ -76,9 +76,9 @@ const GameBoard = () => {
       </div>
 
       <Card className="p-2 mb-2 shadow-xl">
-        <CardContent className="p-2 bg-muted rounded-lg">
+        <CardContent className="p-2 flex items-center justify-center">
           <div
-            className="grid grid-cols-4 items-center gap-2 w-[85vw] h-[85vw] xsm:w-[300px] xsm:h-[300px] md:w-[400px] md:h-[400px]"
+            className="grid grid-cols-4 gap-2 w-[85vw] h-[85vw+4px] xsm:w-[300px] xsm:h-[300px] md:w-[400px] md:h-[400px] justify-items-center items-center"
           >
             {gameState.grid.map((row, i) =>
               row.map((cell, j) => (
