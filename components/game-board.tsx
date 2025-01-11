@@ -54,18 +54,18 @@ const GameBoard = () => {
   return (
     <div className="flex flex-1 flex-col items-center justify-center mt-8 md:mt-0 transition-colors duration-300 sm:z-50">
       <div className="w-[calc(85vw+28px)] xsm:w-[332px] md:w-[432px] flex justify-between mb-4 sm:mb-3">
-        <Button variant="outline" className="h-14" onClick={handleNewGame}>
+        <Button variant="outline" className="h-full max-h-14" onClick={handleNewGame}>
           New Game
         </Button>
-        <Card className="h-14">
-          <CardContent className="flex items-center justify-center gap-2">
-            <div className="flex flex-col items-center justify-center gap-1">
+        <Card className="flex flex-col items-center justify-center h-14 p-2">
+          <CardContent className="flex items-center justify-center gap-2 p-0">
+            <div className="flex flex-col items-center justify-center">
               <div className="text-muted-foreground text-sm">SCORE</div>
               <div className="text-foreground text-xl font-bold">
                 {gameState.score}
               </div>
             </div>
-            <div className="flex flex-col items-center justify-center gap-1">
+            <div className="flex flex-col items-center justify-center">
               <div className="text-muted-foreground text-sm">BEST</div>
               <div className="text-foreground text-xl font-bold">
                 {gameState.bestScore}
