@@ -28,9 +28,9 @@ export const GitHubLink = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.2 }}
-              className="absolute bottom-full w-[12ch] left-0 mb-2 px-2 py-1 bg-popover text-popover-foreground text-sm text-center rounded shadow-md"
+              className="absolute bottom-full w-[14ch] left-0 mb-2 px-2 py-1 bg-popover text-popover-foreground text-sm text-center rounded shadow-md"
             >
-              By Bereket
+              By Bereket K.
             </motion.div>
           )}
         </AnimatePresence>
