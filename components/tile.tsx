@@ -54,7 +54,7 @@ export function Tile({ value, isNew, isMerged }: TileProps) {
       {hasGif ? (
         <div className="relative w-full h-full">
           <Image
-            src={gifNumbers[value as keyof typeof gifNumbers]}
+            src={`/gifs${gifNumbers[value as keyof typeof gifNumbers]}`}
             alt={`Number ${value}`}
             fill
             sizes="(max-width: 600px) 65px, (max-width: 768px) 85px, 100px"
