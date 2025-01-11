@@ -1,6 +1,6 @@
 # 2048 Game in Next.js 15
 
-![2048 Game](./og-image.png)
+![2048 Game](public/og-image.png)
 
 ## Description
 
