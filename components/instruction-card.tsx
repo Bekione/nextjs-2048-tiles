@@ -25,7 +25,7 @@ const InstractionCard = () => {
   }, []);
 
   return (
-    <div className="absolute right-4 bottom-4 w-full z-50">
+    <div className="fixed right-4 bottom-4 w-fit z-50">
       <Button
         variant="outline"
         size="icon"
