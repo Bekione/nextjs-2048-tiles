@@ -50,7 +50,9 @@ const GameBoard = () => {
     onSwipedUp: () => move('up'),
     onSwipedDown: () => move('down'),
     preventScrollOnSwipe: true,
-    trackMouse: true
+    trackMouse: true,
+    delta: 10,
+    swipeDuration: 500,
   })
 
   const handleNewGame = () => {
