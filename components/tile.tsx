@@ -25,9 +25,9 @@ interface TileProps {
 }
 
 const gifNumbers = {
-    // 2: '/2.webp',
-    // 4: '/4.webp',
-    // 8: '/8.webp',
+    2: '/2.webp',
+    4: '/4.webp',
+    8: '/8.webp',
     16: '/16.webp',
     32: '/32.gif',
     64: '/64.gif',
