@@ -1,6 +1,7 @@
 {
   "name": "2048 Tiles",
   "short_name": "2048",
+  "description": "The classic 2048 game reimagined with Next.js 15 and modern components.",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -13,7 +14,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#41a1a4",
+  "background_color": "#262626",
   "display": "standalone"
 }
