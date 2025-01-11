@@ -41,7 +41,7 @@ const InstractionCard = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="ml-auto mr-10 lg:mr-0 w-fit"
+            className="ml-auto mr-10 lg:mr-0 w-72 xsm:w-fit"
           >
             <Card>
               <CardContent className="p-4 text-center text-muted-foreground">
