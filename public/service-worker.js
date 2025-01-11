@@ -4,7 +4,6 @@ const urlsToCache = [
   '/manifest.webmanifest',
   '/android-chrome-192x192.png',
   '/android-chrome-512x512.png',
-  // Game number GIFs 
   '/gifs/2.webp',
   '/gifs/4.webp',
   '/gifs/8.webp',
@@ -12,8 +11,6 @@ const urlsToCache = [
   '/gifs/32.gif',
   '/gifs/64.gif',
   '/gifs/128.gif',
-//   '/gifs/256.gif',  //I couldn't find gif of these two numbers :(
-//   '/gifs/512.gif',
   '/gifs/1024.gif',
   '/gifs/2048.gif',
 ];
