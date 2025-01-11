@@ -57,6 +57,7 @@ export function Tile({ value, isNew, isMerged }: TileProps) {
             src={gifNumbers[value as keyof typeof gifNumbers]}
             alt={`Number ${value}`}
             fill
+            sizes="(max-width: 600px) 65px, (max-width: 768px) 85px, 100px"
             className="object-cover"
             priority
           />
