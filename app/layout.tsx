@@ -16,17 +16,17 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "2048 with Next.js 15",
   description:
-    "The famous 2048 game built with Next.js 15 and modern components.",
+    "The classic 2048 game reimagined with Next.js 15 and modern components.",
   keywords: "2048, Next.js, game, modern components",
   authors: [{ name: "Bereket Kinfe" }],
   openGraph: {
     title: "2048 with Next.js 15",
-    description: "The famous 2048 game built with Next.js 15 and modern components.",
-    url: "https://nextjs-2048-tiles.vercel.app",
+    description: "The classic 2048 game reimagined with Next.js 15 and modern components.",
+    url: "https://2048-tiles.vercel.app",
     type: "website",
     images: [
       {
-        url: "https://nextjs-2048-tiles.vercel.app/og-image.jpg",
+        url: "https://2048-tiles.vercel.app/og-image.png",
         width: 800,
         height: 600,
         alt: "2048 Game",
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@bekione23",
     title: "2048 with Next.js 15",
-    description: "The famous 2048 game built with Next.js 15 and modern components.",
-    images: "https://nextjs-2048-tiles.vercel.app/og-image.jpg",
+    description: "The classic 2048 game reimagined with Next.js 15 and modern components.",
+    images: "https://2048-tiles.vercel.app/og-image.png",
   },
 };
 
