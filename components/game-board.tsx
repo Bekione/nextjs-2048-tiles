@@ -44,11 +44,13 @@ const GameBoard = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [move]);
 
-  const swiperHandlers = useSwipeable({
-    onSwiped: ({ dir }) => {
-      move(dir === "Up" ? "up" : dir === "Down" ? "down" : dir === "Left" ? "left" : "right");
-    },
-    trackMouse: true,
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => move('left'),
+    onSwipedRight: () => move('right'),
+    onSwipedUp: () => move('up'),
+    onSwipedDown: () => move('down'),
+    preventScrollOnSwipe: true,
+    trackMouse: true
   })
 
   const handleNewGame = () => {
@@ -66,7 +68,7 @@ const GameBoard = () => {
           New Game
         </Button>
         <Card className="flex flex-col items-center justify-center h-14 p-2">
-          <CardContent className="flex items-center justify-center gap-2 p-0" {...swiperHandlers}>
+          <CardContent className="flex items-center justify-center gap-2 p-0" {...swipeHandlers}>
             <div className="flex flex-col items-center justify-center">
               <div className="text-muted-foreground text-sm">SCORE</div>
               <div className="text-foreground text-xl font-bold">
