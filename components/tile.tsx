@@ -25,9 +25,9 @@ interface TileProps {
 }
 
 const gifNumbers = {
-    2: '/2.webp',
-    4: '/4.webp',
-    8: '/8.webp',
+    // 2: '/2.webp',
+    // 4: '/4.webp',
+    // 8: '/8.webp',
     16: '/16.webp',
     32: '/32.gif',
     64: '/64.gif',
@@ -45,7 +45,7 @@ export function Tile({ value, isNew, isMerged }: TileProps) {
       animate={{ scale: 1 }}
       transition={{ type: "spring", stiffness: 500, damping: 30 }}
       className={cn(
-        "w-full h-full rounded-lg flex items-center justify-center text-4xl font-bold shadow-xl overflow-hidden",
+        "w-full h-full rounded-lg flex items-center justify-center text-4xl font-bold shadow-xl overflow-hidden select-none",
         !hasGif &&
           (colors[value as keyof typeof colors] || "bg-violet-700 text-white"),
         isMerged && "animate-pop"
@@ -58,8 +58,9 @@ export function Tile({ value, isNew, isMerged }: TileProps) {
             alt={`Number ${value}`}
             fill
             sizes="(max-width: 600px) 65px, (max-width: 768px) 85px, 100px"
-            className="object-cover"
+            className="object-cover pointer-events-none"
             priority
+            draggable={false}
           />
         </div>
       ) : (
