@@ -106,7 +106,7 @@ const GameBoard = () => {
             <DialogTitle>{gameState.hasWon ? 'Congratulations! 🎉' : 'Game Over! 😢'}</DialogTitle>
             <DialogDescription>
               {gameState.hasWon 
-                ? <span>You've reached <span className="font-semibold text-teal-500">2048</span>! Want to keep going?</span>
+                ? <span>You&apos;ve reached <span className="font-semibold text-teal-500">2048</span>! Want to keep going?</span>
                 : "No more moves available. Try again?"}
             </DialogDescription>
           </DialogHeader>
