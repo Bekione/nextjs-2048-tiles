@@ -44,7 +44,7 @@ const InstractionCard = () => {
             className="ml-auto mr-10 lg:mr-0 w-72 xsm:w-fit"
           >
             <Card>
-              <CardContent className="p-4 text-center text-muted-foreground">
+              <CardContent className="p-4 text-center text-muted-foreground select-none">
                 <p>Use arrow keys, WASD or swipe to move tiles</p>
                 <p>Add the same numbers to reach 2048!</p>
               </CardContent>

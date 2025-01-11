@@ -8,10 +8,10 @@ const Header = () => {
         <span className="absolute mx-auto py-2 sm:py-4 flex border w-fit animated-gradient bg-gradient-to-r blur-xl from-blue-500 via-teal-500 to-pink-500 bg-clip-text text-4xl cs-sm:text-5xl c-md:text-6xl box-content font-extrabold text-transparent text-center select-none">
           2048
         </span>
-        <h1 className="relative top-0 w-fit h-auto py-2 sm:py-4 justify-center flex animated-gradient bg-gradient-to-r items-center from-blue-500 via-teal-500 to-pink-500 bg-clip-text text-4xl cs-sm:text-5xl c-md:text-6xl font-extrabold text-transparent text-center select-auto">
+        <h1 className="relative top-0 w-fit h-auto py-2 sm:py-4 justify-center flex animated-gradient bg-gradient-to-r items-center from-blue-500 via-teal-500 to-pink-500 bg-clip-text text-4xl cs-sm:text-5xl c-md:text-6xl font-extrabold text-transparent text-center select-none">
           2048
         </h1>
-        <p className="text-muted-foreground font-mono text-xs sm:text-sm -mt-3">W Next.js 15</p>
+        <p className="text-muted-foreground font-mono text-xs sm:text-sm -mt-3 select-none">W Next.js 15</p>
       </div>
 
       <ThemeToggle />
