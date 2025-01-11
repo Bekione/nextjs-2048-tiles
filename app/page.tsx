@@ -1,6 +1,6 @@
 import Header from "@/components/header";
 import GameBoard from "@/components/game-board";
-import InstractionCard from "@/components/instraction-card";
+import InstractionCard from "@/components/instruction-card";
 import { GitHubLink } from "@/components/github-link";
 export default function Home() {
   return (
