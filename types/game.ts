@@ -18,3 +18,9 @@ export type GameState = {
   isGameOver: boolean;
   hasWon: boolean;
 };
+
+export type CloudinaryLoaderProps = {
+  src: string;
+  width: number;
+  quality?: number | string;
+};
