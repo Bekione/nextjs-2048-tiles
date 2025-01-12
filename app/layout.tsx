@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/providers";
-import { gifNumbers } from "@/components/tile";
 import Image from "next/image";
 import "./globals.css";
 
@@ -15,6 +14,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const BASE_URL = 'https://2048-tiles.vercel.app';
+
 export const viewport = {
   themeColor: "#262626",
 };
@@ -24,17 +25,17 @@ export const metadata: Metadata = {
   description:
     "The classic 2048 game reimagined with Next.js 15 and modern components.",
   keywords: "2048, Next.js, game, game remake, animated tiles",
-  metadataBase: new URL("https://2048-tiles.vercel.app"),
+  metadataBase: new URL(BASE_URL),
   authors: [{ name: "Bereket Kinfe" }],
   openGraph: {
     title: "2048 with Next.js 15",
     description:
       "The classic 2048 game reimagined with Next.js 15 and modern components.",
-    url: "https://2048-tiles.vercel.app",
+    url: BASE_URL,
     type: "website",
     images: [
       {
-        url: "https://2048-tiles.vercel.app/og-image.png",
+        url: `${BASE_URL}/og-image.png`,
         width: 800,
         height: 600,
         alt: "2048 Game",
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
     title: "2048 with Next.js 15",
     description:
       "The classic 2048 game reimagined with Next.js 15 and modern components.",
-    images: "https://2048-tiles.vercel.app/og-image.png",
+    images: `${BASE_URL}/og-image.png`,
   },
   icons: {
     icon: [
@@ -74,16 +75,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gifNumbers: number[] = [2, 4, 8, 16, 32, 64, 128, 1024, 2048];
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div style={{ display: "none" }}>
-          {Object.values(gifNumbers).map((src) => (
+          {gifNumbers.map((src) => (
             <Image
               key={src}
-              src={`/gifs${src}`}
+              src={`/gifs/${src}.webp`}
               alt=""
               width={1}
               height={1}
@@ -91,7 +93,6 @@ export default function RootLayout({
             />
           ))}
         </div>
-
         <Providers>{children}</Providers>
       </body>
     </html>
