@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/providers";
-import Image from "next/image";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -75,24 +74,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const gifNumbers: number[] = [2, 4, 8, 16, 32, 64, 128, 1024, 2048];
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div style={{ display: "none" }}>
-          {gifNumbers.map((src) => (
-            <Image
-              key={src}
-              src={`/gifs/${src}.webp`}
-              alt=""
-              width={128}
-              height={128}
-              priority
-            />
-          ))}
-        </div>
         <Providers>{children}</Providers>
       </body>
     </html>
