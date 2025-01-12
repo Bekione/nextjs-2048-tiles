@@ -111,7 +111,7 @@ const GameBoard = () => {
       </Card>
 
       <Dialog open={gameState.isGameOver || gameState.hasWon} onOpenChange={() => {}}>
-        <DialogContent>
+        <DialogContent className="w-fit">
           <DialogHeader>
             <DialogTitle>{gameState.hasWon ? 'Congratulations! 🎉' : 'Game Over! 😢'}</DialogTitle>
             <DialogDescription>
@@ -120,7 +120,7 @@ const GameBoard = () => {
                 : "No more moves available. Try again?"}
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter>
+          <DialogFooter className="flex flex-col sm:flex-row gap-2">
             <Button variant="outline" onClick={resetGame}>New Game</Button>
             {gameState.hasWon && (
               <Button className="bg-gradient-to-r from-blue-500 via-teal-500 to-pink-500" onClick={() => setGameState((prev) => ({ ...prev, hasWon: false }))}>
@@ -132,14 +132,14 @@ const GameBoard = () => {
       </Dialog>
 
       <Dialog open={showResetConfirm} onOpenChange={setShowResetConfirm}>
-        <DialogContent>
+        <DialogContent className="w-fit">
           <DialogHeader>
             <DialogTitle>Start New Game?</DialogTitle>
             <DialogDescription>
               Your current game progress will be lost. Are you sure you want to start a new game?
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter>
+          <DialogFooter className="flex flex-col sm:flex-row gap-2">
             <Button variant="outline" onClick={() => setShowResetConfirm(false)}>Cancel</Button>
             <Button 
               variant="destructive" 
