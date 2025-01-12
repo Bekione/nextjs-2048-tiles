@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import cloudinaryLoader from "@/lib/image-loader";
 
 const colors = {
     2: "bg-gradient-to-r from-teal-200 to-teal-300 text-white",
@@ -24,7 +25,7 @@ interface TileProps {
   isMerged?: boolean;
 }
 
-const gifNumbers: number[] = [2, 4, 8, 16, 32, 64, 128, 1024, 2048];
+export const gifNumbers: number[] = [2, 4, 8, 16, 32, 64, 128, 1024, 2048];
 
 export function Tile({ value, isNew, isMerged }: TileProps) {
   const hasGif = gifNumbers.includes(value);
@@ -43,6 +44,7 @@ export function Tile({ value, isNew, isMerged }: TileProps) {
       {hasGif ? (
         <div className="relative w-full h-full">
           <Image
+            loader={cloudinaryLoader}
             src={`/gifs/${value}.webp`}
             alt={value.toString()}
             fill
