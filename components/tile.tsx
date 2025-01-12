@@ -24,20 +24,10 @@ interface TileProps {
   isMerged?: boolean;
 }
 
-export const gifNumbers = {
-    2: '/2.webp',
-    4: '/4.webp',
-    8: '/8.webp',
-    16: '/16.webp',
-    32: '/32.gif',
-    64: '/64.gif',
-    128: '/128.gif',
-    1024: '/1024.gif',
-    2048: '/2048.gif',
-};
+const gifNumbers: number[] = [2, 4, 8, 16, 32, 64, 128, 1024, 2048];
 
 export function Tile({ value, isNew, isMerged }: TileProps) {
-  const hasGif = Object.keys(gifNumbers).map(Number).includes(value);
+  const hasGif = gifNumbers.includes(value);
 
   return (
     <motion.div
@@ -53,7 +43,7 @@ export function Tile({ value, isNew, isMerged }: TileProps) {
       {hasGif ? (
         <div className="relative w-full h-full">
           <Image
-            src={`/gifs${gifNumbers[value as keyof typeof gifNumbers]}`}
+            src={`/gifs/${value}.webp`}
             alt={value.toString()}
             fill
             sizes="(max-width: 600px) 65px, (max-width: 768px) 85px, 100px"
