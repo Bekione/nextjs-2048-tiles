@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import {
   type Cell,
   type Grid,
@@ -29,7 +30,7 @@ function generateRandomCell(grid: Grid): Cell | null {
   if (emptyCells.length === 0) return null;
   const [x, y] = emptyCells[Math.floor(Math.random() * emptyCells.length)];
   return {
-    id: `${x}-${y}-${Date.now()}`,
+    id: uuidv4(),
     value: Math.random() < 0.9 ? 2 : 4,
     x,
     y,
@@ -74,7 +75,7 @@ function merge(grid: Grid): { newGrid: Grid; score: number; merged: boolean } {
       if (grid[i][j]?.value === grid[i][j + 1]?.value) {
         const mergedValue = grid[i][j]!.value * 2;
         newGrid[i][colIndex] = {
-          id: `${i}-${colIndex}-${Date.now()}`,
+          id: uuidv4(),
           value: mergedValue,
           x: i,
           y: colIndex,
@@ -86,7 +87,7 @@ function merge(grid: Grid): { newGrid: Grid; score: number; merged: boolean } {
       } else {
         newGrid[i][colIndex] = {
           ...grid[i][j]!,
-          id: `${i}-${colIndex}-${Date.now()}`,
+          id: uuidv4(),
           x: i,
           y: colIndex,
           isMerged: false,
@@ -102,7 +103,7 @@ function merge(grid: Grid): { newGrid: Grid; score: number; merged: boolean } {
     ) {
       newGrid[i][colIndex] = {
         ...grid[i][GRID_SIZE - 1]!,
-        id: `${i}-${colIndex}-${Date.now()}`,
+        id: uuidv4(),
         x: i,
         y: colIndex,
         isMerged: false,
@@ -112,6 +113,18 @@ function merge(grid: Grid): { newGrid: Grid; score: number; merged: boolean } {
 
   return { newGrid, score, merged };
 }
+
+function areGridsEqual(grid1: Grid, grid2: Grid): boolean {
+  for (let i = 0; i < grid1.length; i++) {
+    for (let j = 0; j < grid1[i].length; j++) {
+      if (grid1[i][j]?.value !== grid2[i][j]?.value) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 
 function moveGrid(
   grid: Grid,
@@ -137,7 +150,8 @@ function moveGrid(
 
   // Compress (move all tiles to the left)
   const compressedGrid = compress(workingGrid);
-  moved = JSON.stringify(compressedGrid) !== JSON.stringify(workingGrid);
+  moved = !areGridsEqual(compressedGrid, workingGrid);
+
 
   // Merge
   const {
