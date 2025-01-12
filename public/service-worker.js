@@ -1,51 +1,61 @@
 const CACHE_NAME = "2048-tiles-cache-v1.0";
-const urlsToCache = [
-  "/",
-  "/manifest.webmanifest",
-  "/android-chrome-192x192.png",
-  "/android-chrome-512x512.png",
-  "/gifs/2.webp",
-  "/gifs/4.webp",
-  "/gifs/8.webp",
-  "/gifs/16.webp",
-  "/gifs/32.webp",
-  "/gifs/64.webp",
-  "/gifs/128.webp",
-  "/gifs/1024.webp",
-  "/gifs/2048.webp",
-];
+let cloudinaryBaseUrl = ""; // Placeholder for dynamic Cloudinary base URL
+
+// Listen for messages from the client
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.cloudinaryBaseUrl) {
+    cloudinaryBaseUrl = event.data.cloudinaryBaseUrl;
+    console.log("Cloudinary Base URL set:", cloudinaryBaseUrl);
+  }
+});
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log("Caching files during install:", urlsToCache);
-      return cache.addAll(urlsToCache);
+      console.log("Caching files during install");
+      return cache.addAll([
+        "/", // Static assets
+        "/manifest.webmanifest",
+        "/android-chrome-192x192.png",
+        "/android-chrome-512x512.png",
+        "/gifs/2.webp",
+        "/gifs/4.webp",
+        "/gifs/8.webp",
+        "/gifs/16.webp",
+        "/gifs/32.webp",
+        "/gifs/64.webp",
+        "/gifs/128.webp",
+        "/gifs/1024.webp",
+        "/gifs/2048.webp",
+      ]);
     })
   );
-  self.skipWaiting(); // Immediately activate the new service worker
+  self.skipWaiting();
 });
 
-// Fetch and serve cached resources
 self.addEventListener("fetch", (event) => {
+  const { request } = event;
+
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return (
-        response ||
-        fetch(event.request).then((networkResponse) => {
-          // Cache new resources dynamically
-          if (event.request.url.includes("/gifs/")) {
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, networkResponse.clone());
-            });
-          }
-          return networkResponse;
-        })
-      );
-    }).catch(() => {
-      // Fallback for GIFs when offline
-      if (event.request.destination === "image") {
-        return caches.match("/fallback-image.png");
+    caches.match(request).then((response) => {
+      if (response) {
+        return response;
       }
+
+      // Handle dynamic caching for Cloudinary-hosted images
+      if (cloudinaryBaseUrl && request.url.startsWith(cloudinaryBaseUrl)) {
+        return fetch(request)
+          .then((networkResponse) => {
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(request, networkResponse.clone());
+            });
+            return networkResponse;
+          })
+          .catch(() => caches.match("/fallback-image.png"));
+      }
+
+      // Default behavior for other requests
+      return fetch(request);
     })
   );
 });
