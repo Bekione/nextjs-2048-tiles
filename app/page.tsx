@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Header from "@/components/header";
 import GameBoard from "@/components/game-board";
-import InstractionCard from "@/components/instruction-card";
+import InstructionCard from "@/components/instruction-card";
 import { GitHubLink } from "@/components/github-link";
 export default function Home() {
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function Home() {
     <div className="h-screen relative flex flex-col items-center bg-muted">
       <Header />
       <GameBoard />
-      <InstractionCard />
+      <InstructionCard />
       <GitHubLink />
     </div>
   );
