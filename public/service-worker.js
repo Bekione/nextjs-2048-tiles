@@ -33,6 +33,21 @@ self.addEventListener("install", (event) => {
   self.skipWaiting();
 });
 
+// Listen for the uninstall event to clear localStorage
+self.addEventListener("uninstall", (event) => {
+  event.waitUntil(
+    // Inform the client to clear localStorage
+    new Promise((resolve) => {
+      self.clients.matchAll().then((clients) => {
+        clients.forEach((client) => {
+          client.postMessage({ action: "clearLocalStorage" });
+        });
+      });
+      resolve();
+    })
+  );
+});
+
 self.addEventListener("fetch", (event) => {
   const { request } = event;
 
