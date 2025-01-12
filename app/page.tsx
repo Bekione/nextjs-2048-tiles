@@ -18,7 +18,10 @@ export default function Home() {
         navigator.serviceWorker
           .register("/service-worker.js")
           .then((registration) => {
-            console.log("Service Worker registered with scope:", registration.scope);
+            console.log(
+              "Service Worker registered with scope:",
+              registration.scope
+            );
 
             // Send the Cloudinary base URL to the service worker
             registration.active?.postMessage({ cloudinaryBaseUrl });
@@ -27,24 +30,32 @@ export default function Home() {
             console.error("Service Worker registration failed:", error);
           });
       });
+
+      // Listen for the clearLocalStorage message from the service worker
+      navigator.serviceWorker.addEventListener("message", (event) => {
+        if (event.data?.action === "clearLocalStorage") {
+          localStorage.removeItem("bestScore");
+          console.log("Best score cleared!");
+        }
+      });
     }
   }, []);
 
   return (
     <div className="h-screen relative flex flex-col items-center bg-muted">
       <div style={{ display: "none" }}>
-          {gifNumbers.map((src) => (
-            <Image
-              loader={cloudinaryLoader}
-              key={src}
-              src={`/gifs/${src}.webp`}
-              alt=""
-              width={128}
-              height={128}
-              priority
-            />
-          ))}
-        </div>
+        {gifNumbers.map((src) => (
+          <Image
+            loader={cloudinaryLoader}
+            key={src}
+            src={`/gifs/${src}.webp`}
+            alt=""
+            width={128}
+            height={128}
+            priority
+          />
+        ))}
+      </div>
       <Header />
       <GameBoard />
       <InstructionCard />
