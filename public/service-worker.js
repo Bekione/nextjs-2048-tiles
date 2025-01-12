@@ -8,11 +8,11 @@ const urlsToCache = [
   "/gifs/4.webp",
   "/gifs/8.webp",
   "/gifs/16.webp",
-  "/gifs/32.gif",
-  "/gifs/64.gif",
-  "/gifs/128.gif",
-  "/gifs/1024.gif",
-  "/gifs/2048.gif",
+  "/gifs/32.webp",
+  "/gifs/64.webp",
+  "/gifs/128.webp",
+  "/gifs/1024.webp",
+  "/gifs/2048.webp",
 ];
 
 self.addEventListener("install", (event) => {
