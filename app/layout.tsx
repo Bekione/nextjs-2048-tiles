@@ -87,8 +87,8 @@ export default function RootLayout({
               key={src}
               src={`/gifs/${src}.webp`}
               alt=""
-              width={1}
-              height={1}
+              width={128}
+              height={128}
               priority
             />
           ))}
