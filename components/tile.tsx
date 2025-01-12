@@ -55,7 +55,7 @@ export function Tile({ value, isNew, isMerged }: TileProps) {
         <div className="relative w-full h-full">
           <Image
             src={`/gifs${gifNumbers[value as keyof typeof gifNumbers]}`}
-            alt={`Number ${value}`}
+            alt={value.toString()}
             fill
             sizes="(max-width: 600px) 65px, (max-width: 768px) 85px, 100px"
             className="object-cover pointer-events-none"
