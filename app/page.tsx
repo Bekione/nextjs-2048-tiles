@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import GameBoard from "@/components/game-board";
 import InstructionCard from "@/components/instruction-card";
 import { GitHubLink } from "@/components/github-link";
+
 export default function Home() {
   useEffect(() => {
     if ("serviceWorker" in navigator) {
