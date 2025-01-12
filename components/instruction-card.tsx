@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Info } from "lucide-react";
 
-const InstractionCard = () => {
+const InstructionCard = () => {
   const [showInstruction, setShowInstruction] = useState(true);
 
   const toggleInstructions = () => {
@@ -56,4 +56,4 @@ const InstractionCard = () => {
   );
 };
 
-export default InstractionCard;
+export default InstructionCard;
