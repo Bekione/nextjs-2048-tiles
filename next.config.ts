@@ -11,5 +11,10 @@ const nextConfig = withPWA({
   register: true,
 })(config)
 
+nextConfig.images = {
+  loader: 'custom',
+  loaderFile: "./lib/image-loader.ts",
+}
+
 export default nextConfig
 
