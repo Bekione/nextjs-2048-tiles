@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
+    id: "/",
     name: "2048 Tiles",
     short_name: "2048",
     description:
@@ -22,6 +23,11 @@ export default function manifest(): MetadataRoute.Manifest {
     background_color: "#262626",
     display: "standalone",
     start_url: "/",
+    orientation: "portrait-primary",
+    launch_handler: {
+      client_mode: "navigate-existing",
+    },
+    categories: ["games", "puzzle"],
     screenshots: [
       {
         src: "/screenshot1.png",
