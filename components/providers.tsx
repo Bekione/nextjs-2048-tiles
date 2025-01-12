@@ -1,26 +1,26 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import { ThemeProvider as NextThemesProvider } from "next-themes"
-import { type ThemeProviderProps } from "next-themes"
+import { useThemeStore } from "@/store/theme-store";
 
-export  function Providers({ children, ...props }: ThemeProviderProps) {
+export function Providers({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
+  const { theme } = useThemeStore();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    if (mounted) {
+      document.documentElement.classList.add(theme);
+      return () => {
+        document.documentElement.classList.remove(theme);
+      };
+    }
+  }, [theme, mounted]);
+
   if (!mounted) return null;
 
-  return (
-    <NextThemesProvider
-      attribute="class"
-      defaultTheme="dark"
-      enableSystem
-      {...props}
-    >
-      {children}
-    </NextThemesProvider>
-  )
+  return <>{children}</>;
 }
