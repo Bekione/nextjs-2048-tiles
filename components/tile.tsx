@@ -24,7 +24,7 @@ interface TileProps {
   isMerged?: boolean;
 }
 
-const gifNumbers = {
+export const gifNumbers = {
     2: '/2.webp',
     4: '/4.webp',
     8: '/8.webp',
@@ -46,8 +46,7 @@ export function Tile({ value, isNew, isMerged }: TileProps) {
       transition={{ type: "spring", stiffness: 500, damping: 30 }}
       className={cn(
         "w-full h-full rounded-lg flex items-center justify-center text-4xl font-bold shadow-xl overflow-hidden select-none",
-        !hasGif &&
-          (colors[value as keyof typeof colors] || "bg-violet-700 text-white"),
+        colors[value as keyof typeof colors],
         isMerged && "animate-pop"
       )}
     >
