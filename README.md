@@ -11,12 +11,14 @@ Experience the classic 2048 game reimagined with the latest web technologies. Bu
 - **Responsive Design**: Enjoy the game on any device, whether it's a desktop, tablet, or mobile.
 - **Modern Components**: Built with Shadcn for a smooth and interactive experience.
 - **Dark Mode**: Automatically adapts to your system's theme settings.
+- **Progressive Web App (PWA)**: Install the game on your desktop or mobile device for a native app-like experience.
+- **Offline Support**: Play the game even when you are offline.
 
 ## Tech Stack
 
 - **Next.js**: 15.1
-- **Tailwind CSS**: 3.4
 - **TypeScript**
+- **Tailwind CSS**: 3.4
 - **Framer Motion**: 11.1
 - **Lucide React**: 0.46
 - **Vercel**: For deployment
