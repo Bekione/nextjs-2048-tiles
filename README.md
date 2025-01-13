@@ -90,7 +90,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- Original 2048 game by Gabriele Cirulli
+- Original 2048 game by [Gabriele Cirulli](https://github.com/gabrielecirulli/2048)
 - Next.js team for the amazing framework
 - Open source community for the tools and libraries
 
