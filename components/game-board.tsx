@@ -14,7 +14,7 @@ import {
   } from "@/components/ui/dialog"
 import { Tile } from "./tile";
 import { useGame } from "@/hooks/use-game";
-import { type Direction } from "../types/game";
+import { type Direction, type Cell } from "../types/game";
 
 const GameBoard = () => {
   const { gameState, move, resetGame, setGameState } = useGame();
@@ -62,7 +62,12 @@ const GameBoard = () => {
   }
   
   return (
-    <div className="flex flex-1 flex-col items-center justify-center mt-8 md:mt-0 transition-colors duration-300 sm:z-50" {...swipeHandlers}>
+    <div 
+      role="grid"
+      aria-label="2048 Game Board"
+      className="flex flex-1 flex-col items-center justify-center mt-8 md:mt-0 transition-colors duration-300 sm:z-50"
+      {...swipeHandlers}
+    >
       <div className="w-[calc(85vw+28px)] xsm:w-[332px] md:w-[432px] flex justify-between mb-4 sm:mb-3">
         <Button variant="outline" className="h-full max-h-14 select-none" onClick={handleNewGame}>
           New Game
@@ -90,8 +95,8 @@ const GameBoard = () => {
           <div
             className="grid grid-cols-4 gap-2 w-[85vw] h-[85vw+4px] xsm:w-[300px] xsm:h-[300px] md:w-[400px] md:h-[400px] justify-items-center items-center"
           >
-            {gameState.grid.map((row, i) =>
-              row.map((cell, j) => (
+            {gameState.grid.map((row: (Cell | null)[], i: number) =>
+              row.map((cell: Cell | null, j: number) => (
                 <div
                   key={`${i}-${j}`}
                   className="bg-muted-foreground/20 rounded-lg relative w-[calc(80vw/4)] h-[calc(80vw/4)] xsm:w-[65px] xsm:h-[65px] md:w-[85px] md:h-[85px]"
