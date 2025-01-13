@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useState, useReducer } from "react";
 import { v4 as uuidv4 } from "uuid";
 import {
   type Cell,
@@ -182,22 +182,40 @@ function moveGrid(
   return { newGrid: workingGrid, score, moved };
 }
 
-export function useGame() {
-  const [gameState, setGameState] = useState<GameState>(() => {
-    const initialGrid = createEmptyGrid();
-    const cell1 = generateRandomCell(initialGrid);
-    if (cell1) initialGrid[cell1.x][cell1.y] = cell1;
-    const cell2 = generateRandomCell(initialGrid);
-    if (cell2) initialGrid[cell2.x][cell2.y] = cell2;
+type GameAction = 
+  | { type: "UPDATE_GAME_STATE"; payload: GameState }
+  | { type: "RESET_GAME"; payload: GameState };
 
-    return {
-      grid: initialGrid,
-      score: 0,
-      bestScore: parseInt(localStorage.getItem("bestScore") || "0"),
-      isGameOver: false,
-      hasWon: false,
-    };
-  });
+// Add the initial state
+const initialState: GameState = (() => {
+  const initialGrid = createEmptyGrid();
+  const cell1 = generateRandomCell(initialGrid);
+  if (cell1) initialGrid[cell1.x][cell1.y] = cell1;
+  const cell2 = generateRandomCell(initialGrid);
+  if (cell2) initialGrid[cell2.x][cell2.y] = cell2;
+
+  return {
+    grid: initialGrid,
+    score: 0,
+    bestScore: typeof window !== 'undefined' ? parseInt(localStorage.getItem("bestScore") || "0") : 0,
+    isGameOver: false,
+    hasWon: false,
+  };
+})();
+
+// Add the reducer
+function gameReducer(state: GameState, action: GameAction): GameState {
+  switch (action.type) {
+    case "UPDATE_GAME_STATE":
+    case "RESET_GAME":
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+export function useGame() {
+  const [gameState, dispatch] = useReducer(gameReducer, initialState);
 
   const move = useCallback(
     (direction: Direction) => {
@@ -224,18 +242,21 @@ export function useGame() {
       const canMove = checkForPossibleMoves(newGrid)
 
 
-      setGameState({
-        grid: newGrid,
-        score: newScore,
-        bestScore: newBestScore,
-        isGameOver: !canMove,
-        hasWon,
+      dispatch({
+        type: "UPDATE_GAME_STATE",
+        payload: {
+          grid: newGrid,
+          score: newScore,
+          bestScore: newBestScore,
+          isGameOver: !canMove,
+          hasWon,
+        },
       });
     },
     [gameState]
   );
 
-  const checkForPossibleMoves = (grid: Grid): boolean => {
+  const checkForPossibleMoves = useCallback((grid: Grid): boolean => {
     // Check for empty cells
     if (grid.some((row) => row.some((cell) => !cell))) return true;
 
@@ -250,7 +271,7 @@ export function useGame() {
     }
 
     return false;
-  };
+  }, []);
 
   const resetGame = useCallback(() => {
     const initialGrid = createEmptyGrid();
@@ -259,12 +280,15 @@ export function useGame() {
     const cell2 = generateRandomCell(initialGrid);
     if (cell2) initialGrid[cell2.x][cell2.y] = cell2;
 
-    setGameState({
-      grid: initialGrid,
-      score: 0,
-      bestScore: gameState.bestScore,
-      isGameOver: false,
-      hasWon: false,
+    dispatch({
+      type: "RESET_GAME",
+      payload: {
+        grid: initialGrid,
+        score: 0,
+        bestScore: gameState.bestScore,
+        isGameOver: false,
+        hasWon: false,
+      },
     });
   }, [gameState.bestScore]);
 
@@ -272,6 +296,9 @@ export function useGame() {
     gameState,
     move,
     resetGame,
-    setGameState
+    setGameState: (updater: (prev: GameState) => GameState) => {
+      const newState = updater(gameState);
+      dispatch({ type: "UPDATE_GAME_STATE", payload: newState });
+    }
   };
 }
