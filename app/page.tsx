@@ -13,6 +13,12 @@ export default function Home() {
   useEffect(() => {
     if ("serviceWorker" in navigator) {
       const cloudinaryBaseUrl = process.env.NEXT_PUBLIC_CLOUDINARY_BASE_URL;
+      
+      // Add error boundary or fallback handling
+      if (!cloudinaryBaseUrl) {
+        console.error('Cloudinary base URL not configured');
+        return;
+      }
 
       window.addEventListener("load", () => {
         navigator.serviceWorker
